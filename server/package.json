@@ -4,6 +4,7 @@
 	"private": true,
 	"main": "src/index.js",
 	"dependencies": {
-		"graphql-yoga": "^1.9.1"
+		"graphql-yoga": "^1.9.1",
+		"prisma-binding": "^1.5.17"
 	}
 }

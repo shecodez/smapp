@@ -1,85 +1,76 @@
 const { GraphQLServer } = require('graphql-yoga');
+const { Prisma } = require('prisma-binding');
 
-let links = [
-	{
-		id: 'link-0',
-		url: 'www.student-manager-app.com',
-		description: 'A web app to manage studens, and keep track of their progress'
-	}
-];
-
-let courses = [
-	{
-		id: 'course-0',
-		name: 'MATH-1101',
-		description: 'Introductory Mathematics'
-	},
-	{
-		id: 'course-1',
-		name: 'ENGL-1101',
-		description: 'Introductory English'
-	},
-	{
-		id: 'course-2',
-		name: 'CSCI-1101',
-		description: 'Introductory Computer Science'
-	}
-];
-
-let idCount = courses.length;
 const resolvers = {
 	Query: {
 		info: () => `This is the API of Student Manager`,
-		courses: () => courses,
-		feed: () => links
+		courses: (root, args, context, info) => {
+			return context.db.query.courses({}, info);
+		},
+		feed: (root, args, context, info) => {
+			return context.db.query.links({}, info);
+		}
 	},
 	Mutation: {
-		post: (root, args) => {
-			const link = {
-				id: `link-${idCount++}`,
-				description: args.description,
-				url: args.url
-			};
-			links.push(link);
-			return link;
+		post: (root, args, context, info) => {
+			return context.db.mutation.createLink(
+				{
+					data: {
+						url: args.url,
+						description: args.description
+					}
+				},
+				info
+			);
 		},
 
-		createCourse: (root, args) => {
-			const course = {
-				id: `course-${idCount++}`,
-				name: args.name,
-				description: args.description
-			};
-			courses.push(course);
-			return course;
+		createCourse: (root, args, context, info) => {
+			return context.db.mutation.createCourse(
+				{
+					data: {
+						name: args.name,
+						description: args.description
+					}
+				},
+				info
+			);
 		},
-		updateCourse: (root, args) => {
-			const course = {
-				id: args.id,
-				name: args.name,
-				description: args.description
-			};
-			courses.forEach(function(item, i) {
-				if (item.id === args.id) {
-					courses[i] = course;
-					return course[i];
-				}
-			});
+		updateCourse: (root, args, context, info) => {
+			return context.db.mutation.updateCourse(
+				{
+					data: {
+						name: args.name,
+						description: args.description
+					}
+				},
+				info
+			);
 		},
-		deleteCourse: (root, args) => {
-			const courseId = args.id.split('-');
-			const index = courseId.pop();
-			const course = courses[index];
-			if (index > -1) {
-				courses.splice(index, 1);
-				return course;
-			}
+		deleteCourse: (root, args, context, info) => {
+			return context.db.mutation.deleteCourse(
+				{
+					data: {
+						id: args.id
+					}
+				},
+				info
+			);
 		}
 	}
 };
 
 const server = new GraphQLServer({
 	typeDefs: './src/schema.graphql',
-	resolvers
+	resolvers,
+	context: req => ({
+		...req,
+		db: new Prisma({
+			typeDefs: 'src/generated/prisma.graphql',
+			endpoint:
+				'https://us1.prisma.sh/public-glazebee-710/student-manager-api/dev',
+			secret: 'mysecret123',
+			debug: true
+		})
+	})
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
