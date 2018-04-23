@@ -8,7 +8,22 @@ type Query {
   course(id: ID!): Course
 }
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  links: [Link!]!
+}
+
 type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+
   post(url: String!, description: String!): Link!
 
   createCourse(name: String!, description: String!): Course!
