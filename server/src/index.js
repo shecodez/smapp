@@ -69,9 +69,10 @@ const resolvers = {
 		deleteCourse: (root, args) => {
 			const courseId = args.id.split('-');
 			const index = courseId.pop();
+			const course = courses[index];
 			if (index > -1) {
 				courses.splice(index, 1);
-				return 'Course successfully deleted!';
+				return course;
 			}
 		}
 	}

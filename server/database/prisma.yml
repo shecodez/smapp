@@ -1,0 +1,7 @@
+service: student-manager-api
+stage: dev
+datamodel: datamodel.graphql
+# TODO: change to: process.env.PRISMA_SECRET
+secret: mysecret123 
+
+cluster: public-glazebee-710/prisma-us1

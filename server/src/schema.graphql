@@ -3,7 +3,7 @@ type Query {
   feed: [Link!]!
 
   courses: [Course!]!
-  course(id: ID!): Link
+  course(id: ID!): Course
 }
 
 type Mutation {
