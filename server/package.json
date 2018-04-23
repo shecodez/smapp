@@ -1,0 +1,9 @@
+{
+	"name": "server",
+	"version": "1.0.0",
+	"private": true,
+	"main": "src/index.js",
+	"dependencies": {
+		"graphql-yoga": "^1.9.1"
+	}
+}
