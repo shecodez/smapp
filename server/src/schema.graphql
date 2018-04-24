@@ -8,9 +8,21 @@ type Query {
   course(id: ID!): Course
 }
 
-type Feed {
-  links: [Link!]!
-  count: Int!
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+
+  post(url: String!, description: String!): Link!
+  vote(linkId: ID!): Vote
+
+  createCourse(name: String!, description: String!): Course!
+  updateCourse(id: ID!, name: String, description: String): Course
+  deleteCourse(id: ID!): Course
+}
+
+type Subscription {
+  newLink: LinkSubscriptionPayload
+  newVote: VoteSubscriptionPayload
 }
 
 type AuthPayload {
@@ -25,19 +37,7 @@ type User {
   links: [Link!]!
 }
 
-type Subscription {
-  newLink: LinkSubscriptionPayload
-  newVote: VoteSubscriptionPayload
-}
-
-type Mutation {
-  signup(email: String!, password: String!, name: String!): AuthPayload
-  login(email: String!, password: String!): AuthPayload
-
-  post(url: String!, description: String!): Link!
-  vote(linkId: ID!): Vote
-
-  createCourse(name: String!, description: String!): Course!
-  updateCourse(id: ID!, name: String, description: String): Course
-  deleteCourse(id: ID!): Course
+type Feed {
+  links: [Link!]!
+  count: Int!
 }
