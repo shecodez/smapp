@@ -1,13 +1,11 @@
 import React from 'react';
 
+import LinkList from './components/LinkList';
+
 class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        App
-      </div>
-    );
-  }
+	render() {
+		return <LinkList />;
+	}
 }
 
 export default App;
