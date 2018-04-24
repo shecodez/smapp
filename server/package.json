@@ -1,5 +1,5 @@
 {
-	"name": "smapp-server",
+	"name": "student-manager-server",
 	"version": "1.0.0",
 	"private": true,
 	"main": "src/index.js",
