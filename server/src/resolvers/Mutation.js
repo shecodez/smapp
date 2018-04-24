@@ -56,6 +56,28 @@ function post(parent, args, context, info) {
 	);
 }
 
+async function vote(parent, args, context, info) {
+	const userId = getUserId(context);
+
+	const linkExists = await context.db.exists.Vote({
+		user: { id: userId },
+		link: { id: args.linkId }
+	});
+	if (linkExists) {
+		throw new Error(`Already voted for link: ${args.linkId}`);
+	}
+
+	return context.db.mutation.createVote(
+		{
+			data: {
+				user: { connect: { id: userId } },
+				link: { connect: { id: args.linkId } }
+			}
+		},
+		info
+	);
+}
+
 function createCourse(parent, args, context, info) {
 	const userId = getUserId(context);
 	return context.db.mutation.createCourse(
@@ -68,7 +90,6 @@ function createCourse(parent, args, context, info) {
 		},
 		info
 	);
-	// createAudit(id, userId, 'NEW', 'Course');
 }
 
 function updateCourse(parent, args, context, info) {
@@ -83,7 +104,6 @@ function updateCourse(parent, args, context, info) {
 		},
 		info
 	);
-	// createAudit(args.id, userId, 'EDIT', 'Course');
 }
 
 function deleteCourse(parent, args, context, info) {
@@ -96,12 +116,12 @@ function deleteCourse(parent, args, context, info) {
 		},
 		info
 	);
-	// createAudit(args.id, userId, 'DELETE', 'Course');
 }
 
 module.exports = {
 	signup,
 	login,
 	post,
+	vote,
 	createCourse
 };
