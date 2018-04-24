@@ -1,0 +1,16 @@
+{
+	"name": "smapp",
+	"version": "1.0.0",
+	"private": true,
+	"engines": {
+		"node": "8.11.1"
+	},
+	"scripts": {
+		"build": "cd client && yarn build",
+		"start":
+			"concurrently \"cd client && yarn start\" \"cd server && yarn start\""
+	},
+	"dependencies": {
+		"concurrently": "^3.5.1"
+	}
+}
