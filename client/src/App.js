@@ -1,10 +1,11 @@
 import React from 'react';
 
 import LinkList from './components/LinkList';
+import CreateLink from './components/CreateLink';
 
 class App extends React.Component {
 	render() {
-		return <LinkList />;
+		return <CreateLink />;
 	}
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 
 class Link extends React.Component {
+	_voteForLink = async () => {};
+
 	render() {
 		return (
 			<div>
@@ -10,8 +12,6 @@ class Link extends React.Component {
 			</div>
 		);
 	}
-
-	_voteForLink = async () => {};
 }
 
 export default Link;
