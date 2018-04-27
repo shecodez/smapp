@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
-import { Menu, Header as Heading, Button } from 'semantic-ui-react';
+import { Menu, Header as Heading, Button, Icon } from 'semantic-ui-react';
 
 class Header extends React.Component {
 	render() {
@@ -14,6 +14,11 @@ class Header extends React.Component {
 					<Heading as="h3">
 						<Link to="/">Student Manager</Link>
 					</Heading>
+				</Menu.Item>
+				<Menu.Item>
+					<Link to="/search">
+						<Icon name="search" />
+					</Link>
 				</Menu.Item>
 				<Menu.Item>{authToken && <Link to="/create">create</Link>}</Menu.Item>
 
