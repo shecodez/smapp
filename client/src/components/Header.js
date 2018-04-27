@@ -2,33 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
+import { Menu, Header as Heading, Button } from 'semantic-ui-react';
 
 class Header extends React.Component {
 	render() {
 		const authToken = localStorage.getItem(AUTH_TOKEN);
 
 		return (
-			<div>
-				<h2>
-					<Link to="/">Student Manager</Link>
-				</h2>
-				<div>{authToken && <Link to="/create">create</Link>}</div>
+			<Menu pointing secondary>
+				<Menu.Item>
+					<Heading as="h3">
+						<Link to="/">Student Manager</Link>
+					</Heading>
+				</Menu.Item>
+				<Menu.Item>{authToken && <Link to="/create">create</Link>}</Menu.Item>
 
-				<div>
-					{authToken ? (
-						<button
-							onClick={() => {
-								localStorage.removeItem(AUTH_TOKEN);
-								this.props.history.push(`/`);
-							}}
-						>
-							logout
-						</button>
-					) : (
-						<Link to="/login">login</Link>
-					)}
-				</div>
-			</div>
+				<Menu.Menu position="right">
+					<Menu.Item>
+						{authToken ? (
+							<Button
+								onClick={() => {
+									localStorage.removeItem(AUTH_TOKEN);
+									this.props.history.push(`/`);
+								}}
+							>
+								logout
+							</Button>
+						) : (
+							<Link to="/login">login</Link>
+						)}
+					</Menu.Item>
+				</Menu.Menu>
+			</Menu>
 		);
 	}
 }

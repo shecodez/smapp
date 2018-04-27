@@ -1,0 +1,17 @@
+.link {
+	margin: 0.5rem 0;
+
+	.upvote-button {
+		margin: 0 3px;
+		display: inline-block;
+		cursor: pointer;
+		&:hover {
+			color: black;
+		}
+	}
+
+	.link-text {
+		font-weight: bold;
+		font-size: 15px;
+	}
+}

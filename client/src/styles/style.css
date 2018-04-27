@@ -6,3 +6,24 @@ body > #root > .App {
   padding: 0;
   min-height: 100%;
   overflow: hidden; }
+
+.grey {
+  color: grey; }
+
+.float-left {
+  float: left; }
+
+.display-inb {
+  display: inline-block; }
+
+.link {
+  margin: 0.5rem 0; }
+  .link .upvote-button {
+    margin: 0 3px;
+    display: inline-block;
+    cursor: pointer; }
+    .link .upvote-button:hover {
+      color: black; }
+  .link .link-text {
+    font-weight: bold;
+    font-size: 15px; }
