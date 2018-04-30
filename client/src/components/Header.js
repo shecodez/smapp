@@ -16,6 +16,9 @@ class Header extends React.Component {
 					</Heading>
 				</Menu.Item>
 				<Menu.Item>
+					<Link to="/top">Top</Link>
+				</Menu.Item>
+				<Menu.Item>
 					<Link to="/search">
 						<Icon name="search" />
 					</Link>
