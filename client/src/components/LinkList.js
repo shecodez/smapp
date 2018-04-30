@@ -73,7 +73,7 @@ class LinkList extends React.Component {
 						<Link
 							key={link.id}
 							updateStoreAfterVote={this._updateCacheAfterVote}
-							index={index + (page - 1) * LINKS_PER_PAGE}
+							index={page ? index + (page - 1) * LINKS_PER_PAGE : index}
 							link={link}
 						/>
 					))}
