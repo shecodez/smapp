@@ -7,10 +7,11 @@
 	},
 	"scripts": {
 		"build": "cd client && yarn build",
-		"start":
-			"concurrently \"cd client && yarn start\" \"cd server && yarn start\""
+		"start": "concurrently \"cd client && yarn start\" \"cd server && yarn start\""
 	},
 	"dependencies": {
-		"concurrently": "^3.5.1"
+		"apollo-link-ws": "^1.0.8",
+		"concurrently": "^3.5.1",
+		"subscriptions-transport-ws": "^0.9.8"
 	}
 }
